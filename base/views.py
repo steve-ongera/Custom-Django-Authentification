@@ -4,10 +4,12 @@ from .forms import RegistrationForm, LoginForm
 from .models import CustomUser
 
 def register(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password'])  # Hash the password
+            user.save()
             return redirect('login')
     else:
         form = RegistrationForm()
