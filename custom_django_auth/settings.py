@@ -41,6 +41,12 @@ MIDDLEWARE = [
 
 AUTH_USER_MODEL = 'base.CustomUser'
 
+AUTHENTICATION_BACKENDS = [
+    'base.auth_backends.EmailBackend',  # Replace base with the name of your app
+    'django.contrib.auth.backends.ModelBackend',  # Keep the default for Django Admin and other features
+]
+
+
 
 ROOT_URLCONF = 'custom_django_auth.urls'
 
